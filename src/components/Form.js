@@ -25,6 +25,7 @@ function BasicExample() {
       url='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=API_KEY'
     }
   try{
+    setlog(true)
     const response=await fetch(url,{
       method:'POST',
       body:JSON.stringify({
@@ -41,7 +42,7 @@ function BasicExample() {
     }
       const data = await response.json();
     if(isLog){
-
+        
     }else{
 
     }
