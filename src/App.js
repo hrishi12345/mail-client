@@ -1,17 +1,22 @@
-import BasicExample from "./components/Form";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { Component } from 'react';
-import { Route, Routes } from "react-router-dom";
+import React from 'react';
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./components/Home";
+import { useSelector } from "react-redux";
+import AuthForm from "./components/Form";
+import Inbox from './components/inbox';
 
 function App() {
-  const isLogin=true
+  const isLogin = useSelector((state) => state.auth.isLogin);
+  console.log(isLogin)
+
   return (
     <Routes>
-      {!isLogin && <Route path="*" element={<BasicExample />} />}
-      {isLogin && <Route path="/home" element={<Home />} />}
-      </Routes>
-    
+      <Route path="/login" element={!isLogin ? <AuthForm /> : <Navigate to="/home" />} />
+      <Route path="/inbox" element={<Inbox />}/> 
+      <Route path="/home" element={isLogin ? <Home /> : <Navigate to="/login" />} />
+    </Routes>
   );
 }
 
